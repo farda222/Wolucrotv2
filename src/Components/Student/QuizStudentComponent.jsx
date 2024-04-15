@@ -1,6 +1,6 @@
 import Navbar from "../Student/NavbarStudent";
 import { useNavigate } from "react-router-dom";
-import Icon from "../../assets/img/iconquiz.svg";
+import Icon from "../../assets/img/Iconquiz.svg";
 import Iconaccount from "../../assets/img/Account.jpg";
 const QuizStudentComponent = () => {
   const navigate = useNavigate();
