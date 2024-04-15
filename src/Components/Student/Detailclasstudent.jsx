@@ -1,7 +1,7 @@
 //import Navbar from "../Components/NavbarUtama";
 import { useState } from "react";
 import Iconaccount from "../../assets/img/Account.jpg";
-import Navbar from "../../Components/teacher/NavbarUtama";
+import Navbar from "../../Components/Student/NavbarStudent";
 import Icontask from "../../assets/img/Icontask.svg";
 import { useNavigate } from "react-router-dom";
 
