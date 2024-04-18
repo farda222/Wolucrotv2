@@ -24,7 +24,7 @@ const Detail = () => {
             </a>
           </li>
           <li className="mr-2">
-            <a href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/Memberstudent")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Member
             </a>
           </li>

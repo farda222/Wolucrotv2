@@ -4,8 +4,10 @@ import BlueWhaleImage from "../../assets/img/Quizquestion.svg";
 import Paris from "../../assets/img/Paris.jpeg";
 import AccountIcon from "../../assets/img/Account.jpg";
 import Iconrepeat from "../../assets/img/Vector.svg";
+import { useNavigate } from "react-router-dom";
 
 const Answerthequizcomponent = () => {
+  const navigate = useNavigate();
   const questions = [
     {
       id: 1,
@@ -123,7 +125,7 @@ const Answerthequizcomponent = () => {
               Repeat
             </button>
             <button className="mt-3 px-[4.6rem] font-base py-2 border border-solid border-neutral-500 bg-white text-black rounded hover:bg-indigo-700 hover:border-indigo-600 hover:text-white transition-all flex mr-4">Save</button>
-            <button className="mt-3 px-[4.3rem] py-2 border border-solid border-neutral-500 bg-white text-black rounded hover:bg-indigo-700 hover:text-white transition-all flex">Home</button>
+            <button onClick={() => navigate("/QuizStudent")} className="mt-3 px-[4.3rem] py-2 border border-solid border-neutral-500 bg-white text-black rounded hover:bg-indigo-700 hover:text-white transition-all flex">Home</button>
           </div>
         </div>
       </div>
@@ -181,6 +183,7 @@ const Answerthequizcomponent = () => {
               {option}
             </button>
           ))}
+          <button className="bg-indigo-600 py-3 rounded-lg text-white mt-3 hover:bg-indigo-700 transition-all">Submit</button>
         </div>
       </div>
     </div>
