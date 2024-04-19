@@ -56,7 +56,7 @@ const QuizComponent = () => {
     <div className="font-Jakarta overflow-y-hidden relative">
       <Navbar />
       <nav className="bg-white p-4 px-12 py-7 font-Jakarta border-b-2 border-neutral-300">
-        <ul className="flex justify-center items-center gap-3 w-full lg:gap-9 lg:justify-start">
+        <ul className="flex justify-center items-center gap-3 w-full lg:gap-20   lg:justify-start">
           <li className="mr-6">
             <a onClick={() => navigate("/Yourclass")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-full font-semibold transition-all">
               Task

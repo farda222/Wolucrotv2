@@ -25,7 +25,7 @@ const Membercomponent = () => {
             </a>
           </li>
           <li>
-            <a onClick={() => navigate("/Forum")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/Forumstudent")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Forum
             </a>
           </li>

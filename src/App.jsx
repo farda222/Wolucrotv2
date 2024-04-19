@@ -19,6 +19,7 @@ import Classdetailstudent from "./Pages/Student-Page/Detailclasstudentpage";
 import QuizStudent from "./Pages/Student-Page/QuizStudentPage";
 import Answeredquiz from "./Pages/Student-Page/Answerthequizpage";
 import Memberstudent from "./Pages/Student-Page/MemberStudentpage";
+import Forummurid from './Pages/Student-Page/Forumstudentpage'
 function App() {
   return (
     <Router>
@@ -42,6 +43,7 @@ function App() {
         <Route path="/Quizstudent" element={<QuizStudent />}></Route>
         <Route path="/Answeryourquiz" element={<Answeredquiz />}></Route>
         <Route path="/Memberstudent" element={<Memberstudent />}></Route>
+        <Route path="/Forumstudent" element={<Forummurid />}></Route>
       </Routes>
     </Router>
   );

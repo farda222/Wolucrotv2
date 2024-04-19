@@ -25,9 +25,9 @@ const QuizStudentComponent = () => {
             </a>
           </li>
           <li>
-            <a className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">Forum</a>
+            <a onClick={() => navigate("/Forumstudent")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">Forum</a>
           </li>
-        </ul>
+        </ul> 
       </nav>
       <div className="flex justify-center align-middle items-center mx-auto container gap-6 mt-7 ml-1 font-Jakarta lg:mt-28 2xl:mt-32">
         <h1 className="text-black font-semibold text-2xl lg:text-3xl 2xl:ml-60">English XI PPLG 1</h1>
