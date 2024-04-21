@@ -19,7 +19,9 @@ import Classdetailstudent from "./Pages/Student-Page/Detailclasstudentpage";
 import QuizStudent from "./Pages/Student-Page/QuizStudentPage";
 import Answeredquiz from "./Pages/Student-Page/Answerthequizpage";
 import Memberstudent from "./Pages/Student-Page/MemberStudentpage";
-import Forummurid from './Pages/Student-Page/Forumstudentpage'
+import Forummurid from "./Pages/Student-Page/Forumstudentpage";
+import Calendarstudent from "./Pages/Student-Page/Calendarstudentpage";
+import Accountstudent from './Pages/Student-Page/Accountstudentpage'
 function App() {
   return (
     <Router>
@@ -44,6 +46,8 @@ function App() {
         <Route path="/Answeryourquiz" element={<Answeredquiz />}></Route>
         <Route path="/Memberstudent" element={<Memberstudent />}></Route>
         <Route path="/Forumstudent" element={<Forummurid />}></Route>
+        <Route path="/Calendarstudent" element={<Calendarstudent />}></Route>
+        <Route path="/Accountstudent" element={<Accountstudent />}></Route>
       </Routes>
     </Router>
   );
