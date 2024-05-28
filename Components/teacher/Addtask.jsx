@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icontask from "../../assets/img/Icontask.svg"; // Import gambar
 import { useNavigate } from "react-router-dom";
+
 function TaskManager() {
   const [isOpen, setIsOpen] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -11,10 +12,9 @@ function TaskManager() {
     deadline: "",
     link: "",
     createdAt: "",
+    file: null,
   });
 
-  const [isLinkOverlayOpen, setIsLinkOverlayOpen] = useState(false);
-  const [linkFormData, setLinkFormData] = useState("");
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -25,17 +25,11 @@ function TaskManager() {
     });
   };
 
-  const handleLinkInputChange = (event) => {
-    setLinkFormData(event.target.value);
-  };
-
-  const handleLinkConfirm = () => {
+  const handleFileChange = (event) => {
     setFormData({
       ...formData,
-      link: linkFormData,
+      file: event.target.files[0],
     });
-    setIsLinkOverlayOpen(false);
-    setLinkFormData("");
   };
 
   const handleSubmit = (event) => {
@@ -48,35 +42,26 @@ function TaskManager() {
     setIsOpen(false);
     setFormData({
       heading: "",
-      description: "",
-      points: "",
       deadline: "",
-      link: "",
       createdAt: "",
+      file: null,
     });
   };
 
   return (
     <div className="container mx-auto mt-8 font-Jakarta items-center align-middle flex-row">
       {tasks.map((task, index) => (
-        <div key={index} onClick={() => navigate("/Detailtask")} className="border rounded-lg p-4 mb-4 flex w-[23rem] items-center align-middle container mx-auto lg:w-[40rem] 2xl:w-[50rem]">
-          <div className="mr-4 lg:mr-7">
+        <div key={index} onClick={() => navigate("/Detailtask")} className="border rounded-lg p-4 mb-4 flex w-full lg:w-[40rem] 2xl:w-[50rem] items-center align-middle container mx-auto">
+          <div className="mr-4 lg:mr-4">
             <img src={Icontask} alt="Task Icon" /> {/* Menampilkan gambar */}
           </div>
           <div className="lg:mt-3">
             <div className="font-bold mb-2">{task.heading}</div>
-            <div className="mb-2 hidden">{task.description}</div>
             <div className="flex justify-between mb-2">
-              <div className="hidden">Points: {task.points}</div>
               <div className="mb-2 text-xs">{task.createdAt} -</div>
               <div className="text-xs ml-[0.20rem]">
                 <span className="text-red-500 font-semibold">Deadline:</span> {task.deadline}
               </div>
-            </div>
-            <div className="hidden">
-              <a href={task.link} target="_blank" rel="noopener noreferrer">
-                Link
-              </a>
             </div>
           </div>
         </div>
@@ -91,75 +76,65 @@ function TaskManager() {
       {/* Form untuk menambahkan task */}
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-10 py-8 rounded-lg relative w-[95%] 2xl:w-[65%]">
+          <div className="bg-white p-10 py-8 rounded-lg relative w-[95%] lg:w-fit">
             <h2 className="text-lg font-bold mb-10">Add Task</h2>
             <form onSubmit={handleSubmit}>
               {/* Form input fields */}
-              <div className="lg:flex">
-                <div className="lg:flex-row">
-                  <div className="mb-4">
-                    <input placeholder="Heading" type="text" id="heading" name="heading" value={formData.heading} onChange={handleInputChange} className="border rounded px-7 py-5 w-full text-xs font-semibold lg:w-[35rem]" required />
-                  </div>
-                  <div className="mb-10">
-                    <textarea placeholder="Description" id="description" name="description" value={formData.description} onChange={handleInputChange} className="border rounded px-7 py-5 w-full text-xs font-semibold lg:w-[35rem] lg:h-[11rem]" rows="4" required />
+              <div className="lg:flex lg:flex-col lg:gap-4">
+                <div className="mb-4">
+                  <input placeholder="Heading" type="text" id="heading" name="heading" value={formData.heading} onChange={handleInputChange} className="border rounded-2xl px-7 py-5 w-full text-xs font-semibold lg:w-[35rem]" required />
+                </div>
+                <div className="mb-4">
+                  <textarea
+                    placeholder="Description"
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    className="border px-7 py-5 w-full text-xs font-semibold lg:w-[35rem] lg:h-[11rem] rounded-2xl"
+                    rows="4"
+                    required
+                  />
+                </div>
+                <div className="mb-2 justify-center">
+                  <div className="flex items-center justify-center gap-4 lg:flex-row">
+                    <input type="file" id="file" name="file" onChange={handleFileChange} className="hidden justify-center" />
+                    <label htmlFor="file" className="bg-white text-black py-4 px-7 rounded-2xl cursor-pointer text-xs border border-grey-200 lg:px-10 lg:w-full justify-center font-medium align-middle items-center text-center w-full">
+                      Add File
+                    </label>
                   </div>
                 </div>
-                <div className="lg:flex-row lg:ml-10 lg:-mt-1">
+                <div className="lg:flex lg:gap-4 flex">
                   <div className="mb-4">
-                    <label htmlFor="points" className="block text-gray-700 font-bold text-sm">
-                      Points
-                    </label>
-                    <input type="number" id="points" name="points" value={formData.points} onChange={handleInputChange} className="border px-3 py-2 mx-auto rounded bg-gray-100 lg:px-5 lg:py-3" min="0" max="100" required />
-                  </div>
-                  <div className="mb-10">
                     <label htmlFor="deadline" className="block text-gray-700 font-bold text-sm">
                       Deadline
                     </label>
                     <input type="date" id="deadline" name="deadline" value={formData.deadline} onChange={handleInputChange} className="border rounded px-3 py-2 w-full bg-gray-100 lg:px-16 lg:py-3" required />
                   </div>
+                  <div className="mb-4 ml-10 lg:ml-0">
+                    <label htmlFor="points" className="block text-gray-700 font-bold text-sm">
+                      Points
+                    </label>
+                    <input type="number" id="points" name="points" value={formData.points} onChange={handleInputChange} className="border px-3 py-2 mx-auto rounded bg-gray-100 lg:px-5 lg:py-3" min="0" max="100" required />
+                  </div>
                 </div>
               </div>
-              {/* Tombol untuk upload image */}
-              <div className="mb-4">
-                <div className="flex items-center justify-between lg:float-left gap-1">
-                  <input type="file" id="image" name="image" className="hidden" />
-                  <label htmlFor="image" className="bg-indigo-600 hover:bg-indigo-700 text-white py-4 px-7 rounded cursor-pointer text-xs">
-                    Upload Image
-                  </label>
-                  <button type="button" onClick={() => setIsLinkOverlayOpen(true)} className="bg-indigo-600 hover:bg-indigo-700 text-white py-4 px-8 rounded cursor-pointer text-xs lg:ml-10">
-                    Paste Link
-                  </button>
-                </div>
-              </div>
-              <div className="flex justify-between">
-                <button type="submit" className="bg-indigo-600 hover:bg-indigo-700 text-white py-4 px-[2.66rem] rounded text-xs lg:right-0 lg:top-0 lg:absolute lg:mt-10 lg:mr-10">
-                  Assigment
-                </button>
-                <button type="button" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded lg:ml-[65rem] lg:absolute lg:-mt-14" onClick={() => setIsOpen(false)}>
+              {/* Tombol untuk upload image atau file */}
+
+              <div className="flex justify-start gap-2 lg:gap-16 lg:justify-center mt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="bg-white hover
+                      text-black font-medium py-4 lg:px-16 px-8 rounded-xl
+                      text-xs lg:w-full border border-gray-300">
                   Cancel
+                </button>
+                <button type="submit" className="bg-indigo-600 hover:bg-indigo-700 text-white py-4 px-16 rounded-xl text-xs lg:w-full">
+                  Assigment
                 </button>
               </div>
             </form>
-          </div>
-        </div>
-      )}
-
-      {isLinkOverlayOpen && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg relative">
-            {/* Link Overlay Content */}
-            <h2 className="text-lg font-bold mb-4">Paste Link</h2>
-            <div className="mb-4">
-              <input type="text" value={linkFormData} onChange={handleLinkInputChange} placeholder="Paste link here" className="border rounded px-3 py-2 w-full" />
-            </div>
-            <div className="flex justify-between">
-              <button onClick={handleLinkConfirm} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Confirm
-              </button>
-              <button onClick={() => setIsLinkOverlayOpen(false)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Cancel
-              </button>
-            </div>
           </div>
         </div>
       )}

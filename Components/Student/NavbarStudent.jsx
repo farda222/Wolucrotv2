@@ -13,9 +13,9 @@ const Navbar = () => {
 
   const menuItems = [
     { icon: <Home size={25} className="mr-4 font-extrabold" />, text: "Home", route: "/" },
-    { icon: <Calendar size={25} className="mr-4" />, text: "Calendar", route: "/calendar" },
-    { icon: <Trophy size={25} className="mr-4" />, text: "Quiz", route: "/Quizstudent" },
-    { icon: <MdHelp size={25} className="mr-4" />, text: "Yanto Icikiwir", route: "/Profileteacher" }, // Menambahkan properti route
+    { icon: <Calendar size={25} className="mr-4" />, text: "Calendar", route: "/Calendarstudent" },
+    { icon: <Trophy size={25} className="mr-4" />, text: "Achievement", route: "/Achievement" },
+    { icon: <MdHelp size={25} className="mr-4" />, text: "Yanto Icikiwir", route: "/Accountstudent" }, // Menambahkan properti route
   ];
 
   const handleNavClick = () => {

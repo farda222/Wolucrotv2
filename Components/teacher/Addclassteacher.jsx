@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Icon from "../../assets/img/Account.jpg";
 import { useNavigate } from "react-router-dom";
+import Uploadicon from "../../assets/img/Icconupload.svg";
 
 function App() {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -157,45 +158,62 @@ function App() {
 
       {showOverlay && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white w-11/12 md:w-2/3 rounded-md shadow-lg p-7">
-            <h2 className="text-xl font-bold mb-4">Add Class</h2>
-            <form>
-              <div className="mb-4 mt-7">
-                <input placeholder="Class name" type="text" id="className" value={className} onChange={(e) => setClassName(e.target.value)} className="w-full h-14 p-2 border border-gray-300 rounded-md focus:outline-none" />
-              </div>
-              <div className="mb-4 mt-10">
-                <textarea
-                  id="classDescription"
-                  placeholder="Description"
-                  value={classDescription}
-                  onChange={(e) => setClassDescription(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none h-14"></textarea>
-              </div>
-              <div className="mb-4 mt-10">
-                <label htmlFor="background" className="w-full h-14 border border-gray-300 rounded-md focus:outline-none flex items-center justify-between px-4">
-                  <span>{backgroundFileName ? backgroundFileName : "Choose background image"}</span>
-                  {backgroundFileName && (
-                    <button type="button" onClick={() => {setBackground(""); setBackgroundFileName("");}} className="text-red-500">Delete</button>
-                  )}
-                  <input ref={inputFileRef} type="file" id="background" accept="image/*" onChange={handleBackgroundChange} className="sr-only" />
-                </label>
-                {/* Pratinjau gambar */}
-                {background && (
-                  <img src={background} alt="Background Preview" className="mt-2 w-full max-h-40 object-contain" />
-                )}
-              </div>
-              {uploadProgress > 0 && uploadProgress < 100 && (
-                <progress value={uploadProgress} max={100} className="w-full h-2 mt-2 mb-4"></progress>
-              )}
-              <div className="flex justify-end mt-16 gap-4">
-                <button type="button" onClick={handleOverlayClose} className="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
-                  Cancel
-                </button>
-                <button type="button" onClick={handleAddClass} className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-blue-600">
-                  Add Class
-                </button>
-              </div>
-            </form>
+          <div className="bg-white w-11/12 md:w-2/3 rounded-md shadow-lg p-7 flex">
+            <div className="w-full lg:w-1/2 pr-4">
+              <h2 className="text-xl font-bold mb-4">Add Class</h2>
+              <form>
+                <div className="mb-4 mt-7">
+                  <input
+                    placeholder="Class name"
+                    type="text"
+                    id="className"
+                    value={className}
+                    onChange={(e) => setClassName(e.target.value)}
+                    className="w-full h-14 p-2 border border-gray-300 rounded-md focus:outline-none 2xl:rounded-2xl 2xl:p-6 2xl:pl-8 lg:rounded-2xl lg:p-4 lg:pl-8"
+                  />
+                </div>
+                <div className="mb-4 mt-10">
+                  <textarea
+                    id="classDescription"
+                    placeholder="Description"
+                    value={classDescription}
+                    onChange={(e) => setClassDescription(e.target.value)}
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none h-14 2xl:rounded-2xl 2xl:p-4 2xl:pl-8 lg:rounded-2xl lg:p-4 lg:pl-8"></textarea>
+                </div>
+                <div className="mb-4 mt-10">
+                  <label
+                    htmlFor="background"
+                    className="w-full h-14 border border-gray-300 lg:border-dashed 2xl:border-dashed rounded-md focus:outline-none flex items-center justify-between px-4 lg:justify-center 2xl:justify-center lg:border-black lg:flex-col 2xl:flex-col lg:h-40">
+                    <img className="hidden lg:block 2xl:block lg:mb-1 lg:w-[3%]" src={Uploadicon}></img>
+                    <span className="lg:text-indigo-600 hidden lg:block 2xl:block">{backgroundFileName ? backgroundFileName : "Select file image to give cover on your class"}</span>
+                    <span className="lg:text-indigo-600 block lg:hidden 2xl:hidden">{backgroundFileName ? backgroundFileName : "Chose image"}</span>
+                    {!backgroundFileName && <span className="lg:text-gray-500 hidden lg:block 2xl:block">Max size: 2 Mb</span>}
+                    {backgroundFileName && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setBackground("");
+                          setBackgroundFileName("");
+                        }}
+                        className="text-red-500">
+                        Delete
+                      </button>
+                    )}
+                    <input ref={inputFileRef} type="file" id="background" accept="image/*" onChange={handleBackgroundChange} className="sr-only" />
+                  </label>
+                  {uploadProgress > 0 && uploadProgress < 100 && <progress value={uploadProgress} max={100} className="w-full h-2 mt-2 mb-4"></progress>}
+                </div>
+                <div className="flex justify-start mt-16 gap-4  lg:justify-end 2xl:justify-end">
+                  <button type="button" onClick={handleOverlayClose} className="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 lg:text-red-500 lg:bg-white lg:hover:bg-white">
+                    Cancel
+                  </button>
+                  <button type="button" onClick={handleAddClass} className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-blue-600 lg:text-indigo-600 lg:bg-white lg:hover:bg-white">
+                    Add Class
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div className="hidden lg:flex w-1/2 pl-4 items-center justify-center">{background && <img src={background} alt="Background Preview" className="w-full max-w-sm h-auto object-contain" />}</div>
           </div>
         </div>
       )}
