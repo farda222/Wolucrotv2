@@ -3,7 +3,6 @@ import Navbar from "./NavbarStudent";
 import Accountimage from "../../assets/img/Account.jpg";
 
 const Accountteachercomponent = () => {
-
   return (
     <div className="font-Jakarta">
       <Navbar />

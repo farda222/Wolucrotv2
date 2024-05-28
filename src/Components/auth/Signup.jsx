@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Googlebutton from "./Googlebutton";
 import Logo from "../../assets/img/Logo.svg";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = ({ onNavigateToLogin }) => {
   const [email, setEmail] = useState("");
@@ -52,12 +52,11 @@ const SignUpPage = ({ onNavigateToLogin }) => {
       onNavigateToLogin();
     }
   };
-  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-400 px-4 font-custom font-Jakarta">
-    <ToastContainer />
-    <form className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-full max-w-md mt-1">
+      <ToastContainer />
+      <form className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-full max-w-md mt-1">
         <div className="mb-3 flex justify-center mt-2">
           <img src={Logo} alt="Logo" className="h-8 w-auto" />
         </div>
@@ -147,7 +146,7 @@ const ToastMessage = ({ message }) => {
 };
 
 ToastMessage.propTypes = {
-  message: PropTypes.string.isRequired
+  message: PropTypes.string.isRequired,
 };
 
 const LoginPage = ({ onLogin }) => {
@@ -261,9 +260,8 @@ const AuthPage = () => {
     // Proses autentikasi login di sini
   };
 
-  return (
-    <>{isSignUp ? <SignUpPage onNavigateToLogin={handleNavigateToLogin} /> : <LoginPage onLogin={handleLogin} />}</>
-  );
+  return <>{isSignUp ? <SignUpPage onNavigateToLogin={handleNavigateToLogin} /> : <LoginPage onLogin={handleLogin} />}</>;
 };
 
 export default AuthPage;
+  
