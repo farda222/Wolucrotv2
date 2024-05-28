@@ -1,4 +1,4 @@
-import Navbar from "./NavbarUtama";
+import Navbar from "./NavbarStudent";
 import { useNavigate } from "react-router-dom";
 import Iconaccount from "../../assets/img/Account.jpg";
 import moment from "moment-timezone";
@@ -53,30 +53,29 @@ const Forum = () => {
       <nav className="bg-white p-4 px-12 py-7 font-Jakarta lg:float-left border-b-2 border-neutral-300 lg:w-full 2xl:w-full">
         <ul className="flex justify-between items-center lg:gap-14 lg:float-left 2xl:gap-24 2xl:float-left">
           <li className="mr-2">
-            <a onClick={() => navigate("/teacher/class/task")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/student/class/task")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Task
             </a>
           </li>
           <li className="mr-2">
-            <a onClick={() => navigate("/teacher/class/quiz")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/student/class/quiz")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Quiz
             </a>
           </li>
           <li className="mr-2">
-            <a onClick={() => navigate("/teacher/class/members")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/student/class/members")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Member
             </a>
           </li>
           <li>
-            <a onClick={() => navigate("/teacher/class/forum")} href="#" className="text-indigo-600 hover:text-indigo-600 border-b-4 border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/Forumstudent")} href="#" className="text-indigo-600 hover:text-indigo-600 border-b-4 border-indigo-600 w-56 font-semibold transition-all">
               Forum
             </a>
           </li>
         </ul>
       </nav>
-      <div className="flex justify-center align-middle items-center mx-auto container gap-6 mt-7 ml-1 font-Jakarta lg:mt-28 2xl:mt-32 2xl:ml-5">
+      <div className="flex justify-center align-middle items-center mx-auto container gap-28 lg:gap-[30rem] mt-7 ml-1 font-Jakarta lg:mt-32 2xl:mt-32 2xl:ml-5">
         <h1 className="text-black font-semibold text-2xl lg:text-3xl 2xl:ml-60">English XI PPLG 1</h1>
-        <button className="text-white bg-indigo-600 w-16 h-7  font-semibold rounded-md text-xs lg:ml-[30rem] lg:w-20 lg:h-9 2xl:ml-[55rem]">Share</button>
         <div className="relative flex-row -ml-4">
           <button className="flex items-center justify-center w-8 h-8 bg-white rounded-full focus:outline-none focus:bg-gray-300 lg:block lg:ml-6">
             <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24">
@@ -85,23 +84,15 @@ const Forum = () => {
           </button>
         </div>
       </div>
-
-      <div className="flex gap-6 mt-10 bg-neutral-100 p-3 font-Jakarta">
-        <h1 className="text-green-500 font-semibold ml-3 lg:ml-48 2xl:ml-60">Online</h1>
-        <div className="flex gap-2">
-          <img className="w-7  h-7 rounded-full " src={Iconaccount} alt="Icon Account" />
-          <img className="w-7  h-7 rounded-full " src={Iconaccount} alt="Icon Account" />
-          <img className="w-7  h-7 rounded-full " src={Iconaccount} alt="Icon Account" />
-          <img className="w-7  h-7 rounded-full " src={Iconaccount} alt="Icon Account" />
-          <img className="w-7  h-7 rounded-full " src={Iconaccount} alt="Icon Account" />
-        </div>
+      <div className="px-20 mt-16 mb-10 lg:px-[32rem] lg:mt-20 2xl:px-[48rem] 2xl:mb-20">
+        <p className="text-xs flex justify-center bg-neutral-300 mx-auto items-center align-middle px-2 py-2 rounded-sm font-semibold">This forum is used to discuss material.</p>
       </div>
       <div className="mx-auto rounded-lg overflow-hidden mt-5 w-full lg:px-64 lg:mt-10 2xl:px-96">
         <div className="flex">
           <div className="messages-container p-4 space-y-4 overflow-y-auto max-h-full bg-neutral-300 w-fit ml-4 rounded-lg rounded-tl-none">
-            <p className="text-sm font-semibold">Alexander Agung</p>
-            <h1 className="text-sm">Halo semuanya aku alex</h1>
-            <p className="text-xs float-right">07:09</p>
+            <p className="text-sm font-semibold">Bu Ika</p>
+            <h1 className="text-sm">Perhatian semuanya hari ini kalian ada ulangan ya</h1>
+            <p className="text-xs float-right ">07:09</p>
           </div>
         </div>
         <div className="messages-container p-4 space-y-4 overflow-y-auto max-h-[calc(100vh - 400px)]">

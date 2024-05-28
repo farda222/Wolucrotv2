@@ -30,7 +30,7 @@ const HeroSection = () => {
 
         <p className="w-[350px] text-neutral-900 text-lg font-normal mt-3 lg:w-full lg:mt-10 2xl:w-full 2xl:mt-10">Simple. powerful. and fast—the key to a highly efficient online learning experience.</p>
         <div className="lg:flex mt-5 lg:gap-5">
-          <button onClick={() => navigate("/Wolu")} className="bg-indigo-600 text-white w-full py-4 text-sm font-medium mt-3 rounded-md hover:bg-indigo-700 transition-all 2xl:h-fit 2xl:mt-10 2xl:w-56 lg:h-fit lg:mt-10 lg:w-56">
+          <button onClick={() => navigate("/signup")} className="bg-indigo-600 text-white w-full py-4 text-sm font-medium mt-3 rounded-md hover:bg-indigo-700 transition-all 2xl:h-fit 2xl:mt-10 2xl:w-56 lg:h-fit lg:mt-10 lg:w-56">
             <a>Get Started</a>
           </button>
           <button className="bg-white text-indigo-600 border-[0.5px] border-solid border-indigo-600 w-full py-4 text-sm font-medium mt-3 rounded-md hover:bg-indigo-600 hover:text-white transition-all 2xl:h-fit 2xl:mt-10 2xl:w-56 lg:h-fit lg:mt-10 lg:w-56">

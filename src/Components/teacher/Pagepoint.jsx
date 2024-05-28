@@ -21,7 +21,7 @@ const Point = () => {
     <div className="mb-5">
       <Navbar />
       <div className="font-Jakarta">
-        <div onClick={() => navigate("/Detailtask")} className="absolute mt-12 ml-4">
+        <div onClick={() => navigate("/teacher/class/task/assignment")} className="absolute mt-12 ml-4">
           <img className="w-7 lg:ml-20 lg:w-10" src={Back}></img>
         </div>
         <div className="flex mx-auto container align-middle items-center justify-center mt-10 lg:-ml-24 2xl:ml-20">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import Googlebutton from "./Googlebutton";
@@ -8,16 +8,21 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const SignUpPage = ({ onNavigateToLogin }) => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [fullname, setFullname] = useState("");
   const [password, setPassword] = useState("");
   const [passwordStrength, setPasswordStrength] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.location.hash === "#next") {
+      onNavigateToLogin();
+    }
+  }, [onNavigateToLogin]);
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
 
-    // Check password strength
     if (newPassword.length >= 8) {
       setPasswordStrength("Strong");
     } else if (newPassword.length >= 6) {
@@ -44,20 +49,21 @@ const SignUpPage = ({ onNavigateToLogin }) => {
   const handleNext = () => {
     const emailRegex = /@gmail\.com$|@yahoo\.com$/;
 
-    if (!email || !username || !password || password.length < 8) {
+    if (!email || !fullname || !password || password.length < 8) {
       showToast("Semua kolom harus diisi dan password minimal 8 karakter");
     } else if (!emailRegex.test(email)) {
-      showToast("Email harus mengandung @gmail.com atau @yahoo.com");
+      showToast("Email harus valid");
     } else {
+      const signupData = JSON.stringify({ email, fullname, password });
+      localStorage.setItem("signupData", signupData);
       onNavigateToLogin();
     }
   };
-  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-400 px-4 font-custom font-Jakarta">
-    <ToastContainer />
-    <form className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-full max-w-md mt-1">
+      <ToastContainer />
+      <form className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-full max-w-md mt-1">
         <div className="mb-3 flex justify-center mt-2">
           <img src={Logo} alt="Logo" className="h-8 w-auto" />
         </div>
@@ -79,15 +85,15 @@ const SignUpPage = ({ onNavigateToLogin }) => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-xs font-bold mb-2" htmlFor="username">
+          <label className="block text-gray-700 text-xs font-bold mb-2" htmlFor="fullname">
             Fullname
           </label>
           <input
             className="bg-neutral-200 appearance-none border rounded w-full py-3 px-4 text-black font-bold text-xs leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
+            id="fullname"
             type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={fullname}
+            onChange={(e) => setFullname(e.target.value)}
             required
           />
         </div>
@@ -109,7 +115,8 @@ const SignUpPage = ({ onNavigateToLogin }) => {
           <button
             className="bg-white text-xs border-2 border-solid transition-all border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white font-bold py-2 px-20 rounded focus:outline-none focus:shadow-outline"
             type="button"
-            onClick={handleNext}>
+            onClick={handleNext}
+          >
             Next
           </button>
         </div>
@@ -123,12 +130,12 @@ const SignUpPage = ({ onNavigateToLogin }) => {
         </div>
         <div className="mt-6 text-center text-xs">
           Already have an account?{" "}
-          <a onClick={() => navigate("/LoginWolu")} href="#login" className="text-blue-500">
+          <a onClick={() => navigate("/login")} href="#login" className="text-blue-500">
             Login now
           </a>
         </div>
       </form>
-    </div>
+      </div>
   );
 };
 
@@ -150,30 +157,37 @@ ToastMessage.propTypes = {
   message: PropTypes.string.isRequired
 };
 
-const LoginPage = ({ onLogin }) => {
+const LoginPage = ({ onLogin, prefilledData }) => {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [nis, setNis] = useState("");
   const [error, setError] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
-  const navigate = useNavigate(); // Gunakan useNavigate untuk navigasi
+
+  useEffect(() => {
+    if (prefilledData) {
+      setUsername(prefilledData.username || "");
+      setNis(prefilledData.nis || "");
+    }
+  }, [prefilledData]);
 
   const handleClick = (option) => {
     setSelectedOption(option);
   };
 
   const handleLogin = () => {
-    if (!username || !password) {
+    if (!username || !nis || !selectedOption) {
       setError("Semua kolom harus diisi");
       setTimeout(() => setError(""), 3000); // Menghapus pesan kesalahan setelah 3 detik
     } else {
-      onLogin({ username, password });
-
-      // Navigasi berdasarkan opsi radio yang dipilih
-      if (selectedOption === "student") {
-        navigate("/StudentPage"); // Navigasi ke halaman student
-      } else if (selectedOption === "teacher") {
-        navigate("/TeacherPage"); // Navigasi ke halaman teacher
-      }
+      const storedSignupData = JSON.parse(localStorage.getItem("signupData"));
+      const signupData = {
+        ...storedSignupData,
+        username,
+        nis,
+        role: selectedOption === "student" ? true : false,
+      };
+      localStorage.setItem("signupData", JSON.stringify(signupData));
+      onLogin(signupData);
     }
   };
 
@@ -181,7 +195,7 @@ const LoginPage = ({ onLogin }) => {
     <form className="flex flex-col items-center justify-center h-screen bg-gray-400 font-custom px-4 py-2 overflow-y-hidden font-Jakarta">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md mt-4">
         <div className="mb-3 flex justify-center mt-2">
-          <img src={Logo} alt="Logo" className="h-8 w-auto" />
+        <img src={Logo} alt="Logo" className="h-8 w-auto" />
         </div>
         <p className="justify-center align-middle container mx-auto text-center flex text-xs font-extrabold text-black mb-4">WOLU</p>
         <h2 className="text-xl mb-6 text-center font-bold">
@@ -200,29 +214,29 @@ const LoginPage = ({ onLogin }) => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-xs font-bold mb-2" htmlFor="password">
+          <label className="block text-gray-700 text-xs font-bold mb-2" htmlFor="nis">
             NIS
           </label>
           <input
             className="bg-neutral-200 appearance-none border rounded w-full py-3 px-4 text-black font-bold text-xs leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
+            id="nis"
             type="number"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={nis}
+            onChange={(e) => setNis(e.target.value)}
           />
           <div className="mt-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="privacy-policy">
-              <input className="mr-2 leading-tight" type="checkbox" id="privacy-policy" required />I agree to the privacy policy and terms of use of this site.
+              <input className="mr-2 leading-tight" type="checkbox" id="privacy-policy" required />Saya setuju dengan kebijakan privasi dan syarat penggunaan situs ini.
             </label>
           </div>
         </div>
         <div className="flex items-center justify-center align-middle mx-auto gap-10 container">
           <label className={`relative flex items-center ${selectedOption === "student" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"} transition-all duration-300`}>
-            <input type="radio" name="role" defaultValue="student" className="absolute opacity-0" onClick={() => handleClick("student")} />
+            <input type="radio" name="role" value="student" className="absolute opacity-0" onClick={() => handleClick("student")} />
             <span className="px-6 py-3 rounded-full cursor-pointer select-none text-xs font-semibold">Student</span>
           </label>
           <label className={`relative flex items-center ${selectedOption === "teacher" ? "bg-indigo-600 text-white" : "bg-gray-200 text-gray-700"} transition-all duration-300`}>
-            <input type="radio" name="role" defaultValue="teacher" className="absolute opacity-0" onClick={() => handleClick("teacher")} />
+            <input type="radio" name="role" value="teacher" className="absolute opacity-0" onClick={() => handleClick("teacher")} />
             <span className="px-6 py-3 rounded-full cursor-pointer select-none text-xs font-semibold">Teacher</span>
           </label>
         </div>
@@ -234,7 +248,7 @@ const LoginPage = ({ onLogin }) => {
         </div>
         <div className="flex items-center justify-center align-middle mx-auto gap-2 container mt-6">
           <div className="w-20 h-[0.2px] bg-black"></div>
-          <p className="text-xs">Or With</p>
+          <p className="text-xs">Atau Dengan</p>
           <div className="w-20 h-[0.2px] bg-black"></div>
         </div>
         <div className="flex items-center justify-center align-middle mx-auto gap-5 container mt-6">
@@ -247,22 +261,73 @@ const LoginPage = ({ onLogin }) => {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func.isRequired,
+  prefilledData: PropTypes.object,
 };
 
 const AuthPage = () => {
   const [isSignUp, setIsSignUp] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const role = localStorage.getItem("role");
+      if (role === "teacher") {
+        navigate("/teacher/class");
+      } else if (role === "student") {
+        navigate("/student/class");
+      }
+    } else if (window.location.hash === "#next") {
+      setIsSignUp(false);
+    }
+  }, [navigate]);
 
   const handleNavigateToLogin = () => {
     setIsSignUp(false);
   };
 
   const handleLogin = (data) => {
-    console.log("Login data:", data);
-    // Proses autentikasi login di sini
+    const storedSignupData = JSON.parse(localStorage.getItem("signupData"));
+    const { email, fullname, password } = storedSignupData;
+    const { username, nis, role } = data;
+
+    fetch("http://127.0.0.1:8000/api/signup/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        fullname,
+        password,
+        username,
+        nis,
+        role,
+      }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        alert("Registrasi berhasil!");
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", role);
+        if (role === "teacher") {
+          navigate("/teacher/class");
+        } else if (role === "student") {
+          navigate("/student/class");
+        }
+      } else {
+        alert(data.message);
+        navigate("/login");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
   };
 
   return (
-    <>{isSignUp ? <SignUpPage onNavigateToLogin={handleNavigateToLogin} /> : <LoginPage onLogin={handleLogin} />}</>
+    <>{isSignUp ? <SignUpPage onNavigateToLogin={handleNavigateToLogin} /> : <LoginPage onLogin={handleLogin} prefilledData={JSON.parse(localStorage.getItem("signupData"))} />}</>
   );
 };
 

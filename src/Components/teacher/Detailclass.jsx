@@ -19,17 +19,17 @@ const Detail = () => {
             </a>
           </li>
           <li className="mr-2">
-            <a onClick={() => navigate("/Quizpage")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/teacher/class/quiz")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Quiz
             </a>
           </li>
           <li className="mr-2">
-            <a onClick={() => navigate("/Memberpage")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/teacher/class/members")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Member
             </a>
           </li>
           <li>
-            <a onClick={() => navigate("/Forum")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/teacher/class/forum")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Forum
             </a>
           </li>

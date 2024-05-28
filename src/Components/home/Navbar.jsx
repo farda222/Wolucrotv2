@@ -61,10 +61,10 @@ const Navbar = () => {
           </a>
         </div>
         <div className="hidden md:flex items-center space-x-4 lg:hidden">
-          <a onClick={() => navigate("/Wolu")} href="/signup" className={`hover:text-gray-300 ${isNavbarTransparent ? "text-black" : "text-gray-800"}`}>
+          <a onClick={() => navigate("/signup")} href="/signup" className={`hover:text-gray-300 ${isNavbarTransparent ? "text-black" : "text-gray-800"}`}>
             Sign Up
           </a>
-          <a onClick={() => navigate("/LoginWolu")} href="/login" className={`hover:text-gray-300 ${isNavbarTransparent ? "text-black" : "text-gray-800"}`}>
+          <a onClick={() => navigate("/login")} href="/login" className={`hover:text-gray-300 ${isNavbarTransparent ? "text-black" : "text-gray-800"}`}>
             Login
           </a>
         </div>
@@ -112,10 +112,10 @@ const Navbar = () => {
           </div>
         )}
         <div className="flex gap-4 mr-6 lg:mr-0">
-          <button className={"bg-indigo-600 text-white px-6 py-3 font-medium"} onClick={() => navigate("/LoginWolu")}>
+          <button className={"bg-indigo-600 text-white px-6 py-3 font-medium"} onClick={() => navigate("/login")}>
             Login
           </button>
-          <button className={"bg-white text-indigo-600 border-2 border-solid border-indigo-600 px-6 py-[0.6rem] font-medium hidden lg:block"} onClick={() => navigate("/Wolu")}>
+          <button className={"bg-white text-indigo-600 border-2 border-solid border-indigo-600 px-6 py-[0.6rem] font-medium hidden lg:block"} onClick={() => navigate("/signup")}>
             Sign Up
           </button>
         </div>

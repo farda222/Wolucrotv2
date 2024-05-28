@@ -10,22 +10,22 @@ const Membercomponent = () => {
       <nav className="bg-white p-4 px-12 py-7 font-Jakarta lg:float-left border-b-2 border-neutral-300 lg:w-full 2xl:w-full">
         <ul className="flex justify-between items-center lg:gap-14 lg:float-left 2xl:gap-24 2xl:float-left">
           <li className="mr-2">
-            <a onClick={() => navigate("/Yourclass")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/teacher/class/task")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Task
             </a>
           </li>
           <li className="mr-2">
-            <a onClick={() => navigate("/Quizpage")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/teacher/class/quiz")} className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Quiz
             </a>
           </li>
           <li className="mr-2">
-            <a onClick={() => navigate("/Memberpage")} href="#" className="text-indigo-600 hover:text-indigo-600 border-b-4 border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/teacher/class/members")} href="#" className="text-indigo-600 hover:text-indigo-600 border-b-4 border-indigo-600 w-56 font-semibold transition-all">
               Member
             </a>
           </li>
           <li>
-            <a onClick={() => navigate("/Forum")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
+            <a onClick={() => navigate("/teacher/class/forum")} href="#" className="text-black hover:text-indigo-600 hover:border-b-4 hover:border-indigo-600 w-56 font-semibold transition-all">
               Forum
             </a>
           </li>
